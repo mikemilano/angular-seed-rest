@@ -1,0 +1,20 @@
+<h3>AngularJS GitHub Issues</h3>
+<table class="table table-striped">
+  <tr>
+    <th>Number</th>
+    <th>State</th>
+    <th>Reporter</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Assignee</th>
+  </tr>
+  <tr ng-repeat="issue in data.issues">
+    <td>{{issue.number}}</td>
+    <td>{{issue.state}}</td>
+    <td>{{issue.user.login}}</td>
+    <td>{{issue.title}}</td>
+    <td>{{issue.body}}</td>
+    <td>{{issue.assignee}}</td>
+  </tr>
+</table>
+    
