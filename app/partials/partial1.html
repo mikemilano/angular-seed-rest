@@ -1,20 +1,62 @@
-<h3>AngularJS GitHub Issues</h3>
-<table class="table table-striped">
-  <tr>
-    <th>Number</th>
-    <th>State</th>
-    <th>Reporter</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Assignee</th>
-  </tr>
-  <tr ng-repeat="issue in data.issues">
-    <td>{{issue.number}}</td>
-    <td>{{issue.state}}</td>
-    <td>{{issue.user.login}}</td>
-    <td>{{issue.title}}</td>
-    <td>{{issue.body}}</td>
-    <td>{{issue.assignee}}</td>
-  </tr>
-</table>
-    
+<h1 class="lead">AngularJS GitHub Issues</h1>
+
+<div class="well" ng-show="myData.currentIssue == null">
+  <form class="form-search pull-right">
+    <div class="input-append">
+      <input type="text" ng-model="filterText" class="span2 search-query" placeholder="Filter current page">
+      <button ng-click="filterText = null" class="btn">Clear Filter</button>
+    </div>
+  </form>
+
+  <label>Issue State</label>
+  <select ng-model="myData.issueListState" ng-change="getIssueList()">
+    <option value="open">Open</option>
+    <option value="closed">Closed</option>
+  </select>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th class="span1">Number</th>
+        <th class="span2 sortable" ng-class="sortClass('created')" ng-click="setSort('created')">Created</th>
+        <th class="span2 sortable" ng-class="sortClass('updated')" ng-click="setSort('updated')">Updated</th>
+        <th class="span1 sortable" ng-class="sortClass('comments')" ng-click="setSort('comments')">Comments</th>
+        <th class="span1">State</th>
+        <th class="span2">Reporter</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="issue in myData.issueList | filter:filterText">
+        <td class="text-center"><a ng-click="setCurrentIssue(issue.number)">{{issue.number}}</a></td>
+        <td class="text-center">{{issue.created_at | date:'short'}}</td>
+        <td class="text-center">{{issue.updated_at | date:'short'}}</td>
+        <td class="text-center">{{issue.comments}}</td>
+        <td class="text-center" ng-class="issue.state">{{issue.state}}</td>
+        <td class="text-center">{{issue.user.login}}</td>
+        <td>{{issue.title}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="well" ng-show="myData.currentIssue != null">
+  <a ng-click="showAll()">&laquo Back</a>
+  <h4>{{myData.issue.title}}</h4>
+  <dl class="dl-horizontal">
+    <dt>Number</dt>
+    <dd>{{myData.issue.number}}</dd>
+    <dt>Date</dt>
+    <dd>{{myData.issue.created_at}}</dd>
+    <dt>Last Update</dt>
+    <dd>{{myData.issue.updated_at}}</dd>
+    <dt>State</dt>
+    <dd>{{myData.issue.state}}</dd>
+    <dt>URL</dt>
+    <dd>{{myData.issue.url}}</dd>
+    <dt>Asignee</dt>
+    <dd>{{myData.asignee}}</dd>
+    <dt>Body</dt>
+    <dd>{{myData.issue.body}}</dd>
+  </dl>
+</div>
