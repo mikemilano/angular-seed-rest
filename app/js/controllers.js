@@ -73,6 +73,7 @@ angular.module('myApp.controllers', [])
 
     $scope.setCurrentIssue = function(number) {
       AngularIssues.getIssue({number: number}, function(data){
+        console.log(data);
         $scope.myData.currentIssue = data;
       });
     };

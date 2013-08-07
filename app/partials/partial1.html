@@ -45,18 +45,18 @@
   <h4>{{myData.issue.title}}</h4>
   <dl class="dl-horizontal">
     <dt>Number</dt>
-    <dd>{{myData.issue.number}}</dd>
+    <dd>{{myData.currentIssue.number}}</dd>
     <dt>Date</dt>
-    <dd>{{myData.issue.created_at}}</dd>
+    <dd>{{myData.currentIssue.created_at | date:'short'}}</dd>
     <dt>Last Update</dt>
-    <dd>{{myData.issue.updated_at}}</dd>
+    <dd>{{myData.currentIssue.updated_at | date:'short'}}</dd>
     <dt>State</dt>
-    <dd>{{myData.issue.state}}</dd>
+    <dd>{{myData.currentIssue.state}}</dd>
     <dt>URL</dt>
-    <dd>{{myData.issue.url}}</dd>
+    <dd>{{myData.currentIssue.url}}</dd>
     <dt>Asignee</dt>
-    <dd>{{myData.asignee}}</dd>
+    <dd>{{myData.currentIssue.asignee}}</dd>
     <dt>Body</dt>
-    <dd>{{myData.issue.body}}</dd>
+    <dd>{{myData.currentIssue.body}}</dd>
   </dl>
 </div>
